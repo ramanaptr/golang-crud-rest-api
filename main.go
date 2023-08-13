@@ -21,7 +21,6 @@ func main() {
 	// Initialize Database
 	database.Connect(AppConfig.ConnectionString)
 	database.Migrate()
-	
 	// Initialize the router
 	router := mux.NewRouter().StrictSlash(true)
 
@@ -29,7 +28,7 @@ func main() {
 	RegisterProductRoutes(router)
 
 	// Start the server
-	log.Println(fmt.Sprintf("Starting Server on port %s", AppConfig.Port))
+	log.Println(fmt.Sprintf("Starting Server on port %s:%s", AppConfig.Domain, AppConfig.Port))
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", AppConfig.Port), router))
 }
 

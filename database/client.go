@@ -4,7 +4,8 @@ import (
 	"golang-crud-rest-api/entities"
 	"log"
 
-	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
+
 	"gorm.io/gorm"
 )
 
@@ -12,7 +13,7 @@ var Instance *gorm.DB
 var err error
 
 func Connect(connectionString string) {
-	Instance, err = gorm.Open(mysql.Open(connectionString), &gorm.Config{})
+	Instance, err = gorm.Open(postgres.Open(connectionString), &gorm.Config{})
 	if err != nil {
 		log.Fatal(err)
 		panic("Cannot connect to DB")

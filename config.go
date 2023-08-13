@@ -7,13 +7,14 @@ import (
 )
 
 type Config struct {
-	Port           string `mapstructure:"port"`
+	Domain           string `mapstructure:"domain"`
+	Port             string `mapstructure:"port"`
 	ConnectionString string `mapstructure:"connection_string"`
 }
 
 var AppConfig *Config
 
-func LoadAppConfig(){
+func LoadAppConfig() {
 	log.Println("Loading Server Configurations...")
 	viper.AddConfigPath(".")
 	viper.SetConfigName("config")
