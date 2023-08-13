@@ -20,8 +20,8 @@ In this article, we will learn about implementing CRUD in Golang REST API with G
 
 Read the entire article here - https://codewithmukesh.com/blog/implementing-crud-in-golang-rest-api/
 
-## Config your own
-```- Create your database on PostgreSQL Server```\
+## Config your own golang
+```- Create your own database on PostgreSQL Server```\
 ```- Rename config.json.example to config.json```\
 ```- Change value of 'connection_string' at the config file:```
 ```
@@ -33,18 +33,31 @@ Read the entire article here - https://codewithmukesh.com/blog/implementing-crud
 ```
 
 ## Update To date dependencies version (Recommended)
-```go get -u```
+```
+go get -u
+```
+
 ## Or only download current dependencies version (Not Recommended)
-```go get```
+```
+go get
+```
 
 ## Run on local/dev mode
-```go run .```
+```
+go run .
+```
 
 ## Build
-```go build -o file_name```\
-```go run ./file_name```
+```
+go build -o file_name
+```
+```
+go run ./file_name
+```
 
 ## Test Rest API
 Install plugin on vscode named: ```REST Client``` or others like ```'ext:rest'```\
-```test the rest API at folder:```\
-```~/golang-crud-rest-api/collection/products.rest```
+```Test the rest API at folder:```
+```
+~/golang-crud-rest-api/collection/products.rest
+```
