@@ -24,7 +24,8 @@ Read the entire article here - https://codewithmukesh.com/blog/implementing-crud
 ```- Create your database on PostgreSQL Server```\
 ```- Rename config.json.example to config.json```\
 ```- Change value of 'connection_string' at the config file:```
-```{
+```
+{
   "connection_string": "user=username password=yourpassword dbname=yourdb host=localhost port=5432 sslmode=disable TimeZone=Asia/Singapore",
   "domain": "http://localhost",
   "port": 8080
