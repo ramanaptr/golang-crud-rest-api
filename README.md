@@ -21,9 +21,9 @@ In this article, we will learn about implementing CRUD in Golang REST API with G
 Read the entire article here - https://codewithmukesh.com/blog/implementing-crud-in-golang-rest-api/
 
 ## Config your own golang
-```- Create your own database on PostgreSQL Server```\
-```- Rename config.json.example to config.json```\
-```- Change value of 'connection_string' at the config file:```
+- Create your own database on PostgreSQL Server
+- Rename config.json.example to config.json
+- Change value of 'connection_string' at the config file:
 ```
 {
   "connection_string": "user=username password=yourpassword dbname=yourdb host=localhost port=5432 sslmode=disable TimeZone=Asia/Singapore",
