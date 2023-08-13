@@ -51,8 +51,10 @@ go run .
 ```
 go build -o file_name
 ```
+
+## Run Build at Terminal
 ```
-go run ./file_name
+./file_name
 ```
 
 ## Test Rest API
