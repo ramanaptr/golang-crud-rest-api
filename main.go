@@ -7,35 +7,46 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/gorilla/mux"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"gorm.io/gorm"
 )
 
 var DB *gorm.DB
 
 func main() {
-
 	// Load Configurations from config.json using Viper
 	LoadAppConfig()
 
-	// Initialize Database
+	// Initialize Database with Gorm
 	database.Connect(AppConfig.ConnectionString)
 	database.Migrate()
-	// Initialize the router
-	router := mux.NewRouter().StrictSlash(true)
 
-	// Register Routes
-	RegisterProductRoutes(router)
+	// Initialize the echo
+	e := echo.New()
 
-	// Start the server
+	// Root level middleware of echo
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
+	}))
+	// TODO: JWT Auth https://echo.labstack.com/docs/middleware/jwt
+
+	// Register Routes with echo
+	RegisterProductRoutes(e.Group("/product"))
+
+	// Start the server with echo
 	log.Println(fmt.Sprintf("Starting Server on port %s:%s", AppConfig.Domain, AppConfig.Port))
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", AppConfig.Port), router))
+	log.Fatal(e.Start(":" + AppConfig.Port))
 }
 
-func RegisterProductRoutes(router *mux.Router) {
-	router.HandleFunc("/api/products", controllers.GetProducts).Methods("GET")
-	router.HandleFunc("/api/products/{id}", controllers.GetProductById).Methods("GET")
-	router.HandleFunc("/api/products", controllers.CreateProduct).Methods("POST")
-	router.HandleFunc("/api/products/{id}", controllers.UpdateProduct).Methods("PUT")
-	router.HandleFunc("/api/products/{id}", controllers.DeleteProduct).Methods("DELETE")
+func RegisterProductRoutes(g *echo.Group) {
+	productsWithIdEndpoint := "/:id"
+	g.GET("/with/count", controllers.GetAllProducts)
+	g.GET(productsWithIdEndpoint, controllers.GetProductById)
+	g.POST("", controllers.CreateProduct)
+	g.PUT(productsWithIdEndpoint, controllers.UpdateProduct)
+	g.DELETE(productsWithIdEndpoint, controllers.DeleteProduct)
 }
