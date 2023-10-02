@@ -1,0 +1,23 @@
+@host = localhost:8080
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmFtYW5hIFB1dHJhIiwiYWRtaW4iOnRydWUsImV4cCI6MTY5NjUzMTc0M30.76VPlOPSth5q7CGPU1B9XIL8OXyHzLwV4-H0ymOzvsM
+
+// Login
+POST http://{{host}}/auth/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "ramanaptr",
+    "password": "lupapassword"
+}
+
+###
+
+// Restricted
+POST http://{{host}}/auth/me HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "username": "ramanaptr",
+    "password": "lupapassword"
+}

@@ -1,5 +1,7 @@
 {
   "connection_string": "user=username password=yourpassword dbname=yourdb host=localhost port=5432 sslmode=disable TimeZone=Asia/Singapore",
   "domain": "http://localhost",
-  "port": 8080
+  "port": 8080,
+  "secret": "",
+  "refreshSecret": ""
 }

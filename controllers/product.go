@@ -39,9 +39,7 @@ func GetProductById(c echo.Context) error {
 	productId := c.Param("id")
 
 	if !checkIfProductExists(productId) {
-		return c.JSON(http.StatusNotFound, model.Report{
-			Message: "Product Not Found!",
-		})
+		return echo.ErrNotFound
 	}
 
 	var product entities.Product
@@ -60,8 +58,8 @@ func GetAllProducts(c echo.Context) error {
 
 	database.Instance.Find(&products)
 	return c.JSON(http.StatusOK, model.WithCount{
-		Results: products,
-		Count:   int64(len(products)),
+		Data:  products,
+		Count: int64(len(products)),
 	})
 }
 
@@ -74,9 +72,7 @@ func UpdateProduct(c echo.Context) (err error) {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 	if !checkIfProductExists(productId) {
-		return c.JSON(http.StatusNotFound, model.Report{
-			Message: "Product Not Found!",
-		})
+		return echo.ErrNotFound
 	}
 
 	database.Instance.First(&product, productId)
@@ -89,9 +85,7 @@ func DeleteProduct(c echo.Context) error {
 	productId := c.Param("id")
 
 	if !checkIfProductExists(productId) {
-		return c.JSON(http.StatusNotFound, model.Report{
-			Message: "Product Not Found!",
-		})
+		return echo.ErrNotFound
 	}
 
 	var product entities.Product

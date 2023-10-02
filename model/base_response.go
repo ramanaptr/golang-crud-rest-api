@@ -1,10 +1,10 @@
 package model
 
 type Report struct {
-	Message string
+	Message string `json:"message"`
 }
 
 type WithCount struct {
-	Results interface{}
-	Count   int64
+	Data  interface{} `json:"data"`
+	Count int64       `json:"count"`
 }
